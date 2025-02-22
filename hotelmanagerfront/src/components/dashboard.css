@@ -1,0 +1,230 @@
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.titulo-dashboard /*, .logo*/ {
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  font-size: 36px;
+  color: #01579b; /* Azul marino */
+  font-weight: bold;
+  margin-bottom: 20px;
+    /*display: inline-block;
+    vertical-align: middle;
+    */
+}
+
+/*
+.logo {
+    width: 60px;
+    height: 60px;
+    margin-left: 10px; 
+}
+*/
+.dashboard-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: #e0f7fa;
+  padding: 20px;
+}
+
+/* Ajuste para que la tabla y formulario ocupen más espacio */
+.panel-izquierdo {
+  flex: 2;
+  margin-right: 20px;
+}
+
+/* Contenedor de los filtros */
+.filtros-container {
+  font-family: 'Poppins', sans-serif;
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.filtros-container h3 {
+  margin-bottom: 10px;
+  color: #01579b;
+}
+
+.filtros {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.filtros button {
+  padding: 8px 12px;
+  border: none;
+  background-color: #0288d1;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.filtros button:hover {
+  background-color: #0277bd;
+}
+
+/* Botón de filtro seleccionado */
+.filtros button.filtro-activo {
+  background-color: #81d4fa;
+  color: #01579b;
+  font-weight: bold;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #81d4fa;
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #0288d1;
+  color: white;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+button {
+  padding: 8px 12px;
+  border: none;
+  background-color: #0288d1;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #0277bd;
+}
+
+/* Panel derecho: formulario de registro */
+.panel-derecho {
+  background: white;
+  padding: 20px;
+  box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.1);
+  height: 500px;
+}
+
+h2 {
+  text-align: center;
+  color: #01579b;
+  margin-bottom: 20px;
+}
+
+.panel-derecho input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #81d4fa;
+  border-radius: 4px;
+}
+
+.panel-derecho .button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.panel-derecho .register-button, 
+.panel-derecho .clear-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #0288d1;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.panel-derecho .register-button:hover, 
+.panel-derecho .clear-button:hover {
+  background-color: #0277bd;
+}
+
+
+/* Configuraciones para SELECT */ 
+.panel-derecho select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #81d4fa;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 16px;
+  color: #0288d1;
+  cursor: pointer;
+}
+
+/* Estilo cuando el select está enfocado */
+.panel-derecho select:focus {
+  outline: none;
+  border-color: #0288d1;
+  box-shadow: 0px 0px 5px rgba(2, 136, 209, 0.5);
+}
+
+/* Asegura que los selects tengan el mismo tamaño que los inputs */
+.panel-derecho select option {
+  font-size: 16px;
+  color: #0288d1;
+}
+
+/* Ajusta el color del texto dentro del select */
+.panel-derecho select::placeholder {
+  color: #81d4fa;
+}
+
+
+/* Estilos para el modal */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  animation: fadeInOut 1.5s linear;
+}
+
+/* Animación de entrada y salida */
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translate(-50%, -60%); }
+  10% { opacity: 1; transform: translate(-50%, -50%); }
+  90% { opacity: 1; transform: translate(-50%, -50%); }
+  100% { opacity: 0; transform: translate(-50%, -40%); }
+}
+
+
+
+

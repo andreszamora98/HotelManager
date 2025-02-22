@@ -1,0 +1,118 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="920C38D3-E5A0-A76D-40A0-44311A787CBB" name="Usuarios">
+<createdBy>andre</createdBy>
+<createdTime>2025-02-09 20:48:21 UTC</createdTime>
+<generatorID>2D86B783-2CE3-D283-AF70-CA2AB0F60BC6</generatorID>
+<ownerDesignName>Modelo</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID_USUARIO" id="999821FB-876F-C2AC-A245-C5F67C4D5ADE">
+<createdBy>andre</createdBy>
+<createdTime>2025-02-09 20:48:21 UTC</createdTime>
+<comment><![CDATA[Identificador único del usuario]]></comment>
+<commentInRDBMS><![CDATA[Identificador único del usuario]]></commentInRDBMS>
+<generatorID>65C97182-1D72-8FF3-4506-BD3513AD98A3</generatorID>
+<ownerDesignName>Modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CORREO" id="15E76CC3-052B-1B20-F599-7CF8D0882D31">
+<createdBy>andre</createdBy>
+<createdTime>2025-02-09 20:48:21 UTC</createdTime>
+<comment><![CDATA[Correo personal del usuario]]></comment>
+<commentInRDBMS><![CDATA[Correo personal del usuario]]></commentInRDBMS>
+<generatorID>58FB2A9F-E6A0-D4F0-D4E4-9178A3F52E11</generatorID>
+<ownerDesignName>Modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CONTRASEÑA" id="FF550861-3868-CC42-BB3B-E27CD28084C7">
+<createdBy>andre</createdBy>
+<createdTime>2025-02-09 20:48:21 UTC</createdTime>
+<comment><![CDATA[Contraseña del usuario]]></comment>
+<commentInRDBMS><![CDATA[Contraseña del usuario]]></commentInRDBMS>
+<generatorID>70FC7D91-1A00-3098-0966-4003C822D5E5</generatorID>
+<ownerDesignName>Modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>64</dataTypeSize>
+<ownDataTypeParameters>64,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PERFIL" id="8F021D20-768A-411E-0063-ADFA6B7F2DD3">
+<createdBy>andre</createdBy>
+<createdTime>2025-02-09 20:48:21 UTC</createdTime>
+<comment><![CDATA[Rol del usuario en el sistema:
+1 -> Admin
+2 -> Recepcionista
+3 -> Mantenimiento
+4 -> Cliente]]></comment>
+<commentInRDBMS><![CDATA[Rol del usuario en el sistema:
+1 -> Admin
+2 -> Recepcionista
+3 -> Mantenimiento
+4 -> Cliente]]></commentInRDBMS>
+<generatorID>6350390D-1409-705A-1008-775975BF1D18</generatorID>
+<ownerDesignName>Modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ESTATUS" id="5B29C545-DF73-9893-5DF7-47BEA0BE8729">
+<createdBy>andre</createdBy>
+<createdTime>2025-02-09 20:48:21 UTC</createdTime>
+<comment><![CDATA[0 -> inactivo
+1 -> Activo
+]]></comment>
+<generatorID>AA5788B3-7B9D-DBC0-9EB0-C795ECC01BAA</generatorID>
+<ownerDesignName>Modelo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ALTA_REG" id="CF8A16F9-8344-547C-9412-8C2F8A644EE9">
+<createdBy>andre</createdBy>
+<createdTime>2025-02-09 20:48:21 UTC</createdTime>
+<comment><![CDATA[Día en el que se dio de alta el usuario]]></comment>
+<commentInRDBMS><![CDATA[Día en el que se dio de alta el usuario]]></commentInRDBMS>
+<generatorID>57378F41-AADA-1DB8-6C8D-399D55BCF23C</generatorID>
+<ownerDesignName>Modelo</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT047</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="559885EE-F9B5-128B-D28A-245DE4338171" name="Usuarios_PK">
+<createdBy>andre</createdBy>
+<createdTime>2025-02-09 20:48:21 UTC</createdTime>
+<generatorID>C0177566-3CCF-32CE-F39F-C82FF4F21444</generatorID>
+<ownerDesignName>Modelo</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="999821FB-876F-C2AC-A245-C5F67C4D5ADE"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

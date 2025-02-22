@@ -1,0 +1,131 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="2D86B783-2CE3-D283-AF70-CA2AB0F60BC6" name="Usuarios">
+<createdBy>andre</createdBy>
+<createdTime>2025-02-09 20:40:10 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="C43851B9-89BA-32F1-BF5E-DFD00B3FE1AB" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="ID_USUARIO" id="65C97182-1D72-8FF3-4506-BD3513AD98A3">
+<createdBy>andre</createdBy>
+<createdTime>2025-02-09 20:41:37 UTC</createdTime>
+<comment><![CDATA[Identificador único del usuario]]></comment>
+<commentInRDBMS><![CDATA[Identificador único del usuario]]></commentInRDBMS>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="C43851B9-89BA-32F1-BF5E-DFD00B3FE1AB" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="CORREO" id="58FB2A9F-E6A0-D4F0-D4E4-9178A3F52E11">
+<createdBy>andre</createdBy>
+<createdTime>2025-02-09 20:42:13 UTC</createdTime>
+<comment><![CDATA[Correo personal del usuario]]></comment>
+<commentInRDBMS><![CDATA[Correo personal del usuario]]></commentInRDBMS>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="C43851B9-89BA-32F1-BF5E-DFD00B3FE1AB" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="CONTRASEÑA" id="70FC7D91-1A00-3098-0966-4003C822D5E5">
+<createdBy>andre</createdBy>
+<createdTime>2025-02-09 20:43:02 UTC</createdTime>
+<comment><![CDATA[Contraseña del usuario]]></comment>
+<commentInRDBMS><![CDATA[Contraseña del usuario]]></commentInRDBMS>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="C43851B9-89BA-32F1-BF5E-DFD00B3FE1AB" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>64</dataTypeSize>
+<ownDataTypeParameters>64,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="PERFIL" id="6350390D-1409-705A-1008-775975BF1D18">
+<createdBy>andre</createdBy>
+<createdTime>2025-02-09 20:43:49 UTC</createdTime>
+<comment><![CDATA[Rol del usuario en el sistema:
+1 -> Admin
+2 -> Recepcionista
+3 -> Mantenimiento
+4 -> Cliente]]></comment>
+<commentInRDBMS><![CDATA[Rol del usuario en el sistema:
+1 -> Admin
+2 -> Recepcionista
+3 -> Mantenimiento
+4 -> Cliente]]></commentInRDBMS>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="C43851B9-89BA-32F1-BF5E-DFD00B3FE1AB" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ESTATUS" id="AA5788B3-7B9D-DBC0-9EB0-C795ECC01BAA">
+<createdBy>andre</createdBy>
+<createdTime>2025-02-09 20:45:06 UTC</createdTime>
+<comment><![CDATA[0 -> inactivo
+1 -> Activo
+]]></comment>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="C43851B9-89BA-32F1-BF5E-DFD00B3FE1AB" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>1</dataTypeSize>
+<ownDataTypeParameters>1,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ALTA_REG" id="57378F41-AADA-1DB8-6C8D-399D55BCF23C">
+<createdBy>andre</createdBy>
+<createdTime>2025-02-09 20:47:02 UTC</createdTime>
+<comment><![CDATA[Día en el que se dio de alta el usuario]]></comment>
+<commentInRDBMS><![CDATA[Día en el que se dio de alta el usuario]]></commentInRDBMS>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="C43851B9-89BA-32F1-BF5E-DFD00B3FE1AB" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT047</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="C0177566-3CCF-32CE-F39F-C82FF4F21444" name="Usuarios PK">
+<createdBy>andre</createdBy>
+<createdTime>2025-02-09 20:41:56 UTC</createdTime>
+<ownerDesignName>Modelo</ownerDesignName>
+<engineerTo>
+<item key="C43851B9-89BA-32F1-BF5E-DFD00B3FE1AB" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>65C97182-1D72-8FF3-4506-BD3513AD98A3</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
