@@ -7,6 +7,9 @@ const Dashboard = () => {
   const [busqueda, setBusqueda] = useState('');
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);
   const [mostrarInactivos, setMostrarInactivos] = useState(false);
+  const [mostrarTodos, setMostrarTodos] = useState(false);
+
+  const [botonActivo, setBotonActivo] = useState(null); // null, 'inactivos' o 'todos'
   const [formData, setFormData] = useState({
     
     CORREO: '',
@@ -37,11 +40,6 @@ const Dashboard = () => {
             throw new Error('Error obteniendo usuarios');
         }
         let data = await response.json();
-
-        // Filtrar solo usuarios con ESTATUS = 1
-        //data = data.filter(user => user.ESTATUS === '1');
-
-        //console.log('Usuarios activos:', data);
         setUsuarios(data);
     } catch (error) {
         console.error('Error:', error);
@@ -53,6 +51,7 @@ const Dashboard = () => {
 };
 
 
+/*
   const handleEliminar = async (correo) => {
     try {
         const response = await fetch(`http://localhost:3001/users/${correo}`, { method: 'DELETE' });
@@ -65,7 +64,24 @@ const Dashboard = () => {
         console.error('Error al eliminar usuario:', error);
     }
 };
-
+*/
+const handleEliminar = async (correo) => {
+  try {
+    const response = await fetch(`http://localhost:3001/users/${correo}`, {
+      method: 'DELETE',
+    });
+    const data = await response.json();
+    console.log('Respuesta del servidor:', data);
+    if (!response.ok) {
+      throw new Error(data.error || 'Error al deshabilitar el usuario');
+    }
+    mostrarModal('Usuario deshabilitado correctamente');
+    obtenerUsuarios();
+  } catch (error) {
+    console.error('Error al deshabilitar usuario:', error);
+    mostrarModal('Error al deshabilitar el usuario');
+  }
+};
 
 
   const handleSeleccionarUsuario = (usuario) => {
@@ -178,77 +194,61 @@ const handleRegistrar = async () => {
     }
 };
 
+const handleHabilitar = async (correo) => {
+  try {
+    const response = await fetch(`http://localhost:3001/users/habilitar/${correo}`, {
+      method: 'PUT',
+    });
 
-/*
-  const handleActualizar = async () => {
-    if (!usuarioSeleccionado) return;
-    if (!formData.CORREO || !formData.PERFIL || !formData.ESTATUS) {
-        mostrarModal('Ningún campo puede estar vacío');
-        return;
-    }
-
-    const response = await fetch(`http://localhost:3001/users/validar/${formData.CORREO}`);
     const data = await response.json();
+    console.log('Respuesta del servidor:', data);
 
-    if (data.correoExiste && usuarioSeleccionado.CORREO !== formData.CORREO) {
-        mostrarModal('Correo repetido');
-        return;
+    if (!response.ok) {
+      throw new Error(data.error || 'Error al habilitar el usuario');
     }
 
-    console.log('Datos enviados para actualización:', formData);
-
-    try {
-        const response = await fetch(`http://localhost:3001/users/${usuarioSeleccionado?.CORREO}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                correo: formData.CORREO,
-                contraseña: formData.CONTRASEÑA, // Se envía solo si se quiere actualizar
-                perfil: formData.PERFIL,
-                estatus: formData.ESTATUS
-            }),
-        });
-
-        const data = await response.json();
-        console.log('Respuesta del servidor:', data);
-
-        if (!response.ok) {
-            throw new Error(`Error: ${data.error}`);
-        }
-
-        obtenerUsuarios();
-        setUsuarioSeleccionado(null);
-        setFormData({ CORREO: '', CONTRASEÑA: '', PERFIL: '', ESTATUS: '', ALTA_REG: '' });
-        mostrarModal('Usuario actualizado exitosamente');
-
-    } catch (error) {
-        mostrarModal('Error de formato en algún campo');
-        console.error('Error al actualizar usuario:', error);
-    }
+    obtenerUsuarios(); // Recargar la lista de usuarios
+    mostrarModal('Usuario habilitado exitosamente');
+  } catch (error) {
+    console.error('Error al habilitar usuario:', error);
+    mostrarModal('Error al habilitar el usuario');
+  }
 };
-*/
 
-  const handleEliminarDesdeFormulario = async () => {
-    await handleEliminar(usuarioSeleccionado?.CORREO);
+  
+
+const handleEliminarDesdeFormulario = async () => {
+  try {
+    if (usuarioSeleccionado) {
+      await handleEliminar(usuarioSeleccionado.CORREO); // Llama a handleEliminar
+      mostrarModal('Usuario deshabilitado correctamente'); // Muestra el modal
+    }
+  } catch (error) {
+    console.error('Error al deshabilitar usuario:', error);
+    mostrarModal('Error al deshabilitar el usuario');
+  } finally {
+    // Limpiar el formulario y deseleccionar el usuario
     setUsuarioSeleccionado(null);
     setFormData({ CORREO: '', CONTRASEÑA: '', PERFIL: '', ESTATUS: '', ALTA_REG: '' });
+  }
 };
 
-
-  const handleLimpiarFormulario = () => {
+const handleLimpiarFormulario = () => {
     setFormData({ CORREO: '', CONTRASEÑA: '', PERFIL: '', ESTATUS: '', ALTA_REG: '' });
     setUsuarioSeleccionado(null);
 };
-
-  /*
-  const usuariosFiltrados = usuarios.filter((user) =>
-    user?.[filtro]?.toString().toLowerCase().includes(busqueda.toLowerCase())
-  );
-  */
+  
   const usuariosFiltrados = usuarios
-  .filter(user => mostrarInactivos ? user.ESTATUS === '2' : user.ESTATUS === '1')
+  .filter(user => {
+    if (mostrarTodos) {
+      return true; // Mostrar todos los usuarios
+    } else if (mostrarInactivos) {
+      return user.ESTATUS === '2'; // Mostrar solo inactivos
+    } else {
+      return user.ESTATUS === '1'; // Mostrar solo activos
+    }
+  })
   .filter(user => user?.[filtro]?.toString().toLowerCase().includes(busqueda.toLowerCase()));
-
 
   return (
     <div>
@@ -274,11 +274,26 @@ const handleRegistrar = async () => {
               </button>
             ))}
             <button 
-              onClick={() => setMostrarInactivos(!mostrarInactivos)} 
-              className={mostrarInactivos ? 'filtro-activo' : ''}
-            >
-    {mostrarInactivos ? 'MOSTRAR ACTIVOS' : 'MOSTRAR INACTIVOS'}
-  </button>
+              onClick={() => {
+                  setMostrarInactivos(!mostrarInactivos);
+                  setBotonActivo(mostrarInactivos ? null : 'inactivos'); // Activa este botón
+                  setMostrarTodos(false); // Desactiva el botón de "Mostrar todos"
+                  }}
+                className={botonActivo === 'inactivos' ? 'filtro-activo' : ''}
+              >
+
+              {mostrarInactivos ? 'MOSTRAR ACTIVOS' : 'MOSTRAR INACTIVOS'}
+            </button>
+            <button 
+             onClick={() => {
+                setMostrarTodos(!mostrarTodos);
+                setBotonActivo(mostrarTodos ? null : 'todos'); // Activa este botón
+                setMostrarInactivos(false); // Desactiva el botón de "Mostrar inactivos"
+                }}
+              className={botonActivo === 'todos' ? 'filtro-activo' : ''}
+              >
+                MOSTRAR TODOS LOS USUARIOS
+            </button>
           </div>
         </div>
         <input
@@ -307,7 +322,19 @@ const handleRegistrar = async () => {
                   <td>{user.ESTATUS}</td>
                   <td>{user.ALTA_REG}</td>
                   <td>
-                    <button className="delete-button" onClick={(e) => { e.stopPropagation(); handleEliminar(user.CORREO); }}>Eliminar</button>
+                    <button
+                      className="delete-button"
+                      onClick={(e) => {
+                      e.stopPropagation();
+                      if (user.ESTATUS === '2') {
+                        handleHabilitar(user.CORREO); // Función para habilitar usuarios inactivos
+                      } else {
+                        handleEliminar(user.CORREO); // Función para eliminar usuarios activos
+                      }
+                    }}
+                    >
+                      {user.ESTATUS === '2' ? 'Habilitar' : 'Eliminar'}
+                    </button>
                   </td>
                 </tr>
               ))
@@ -343,7 +370,18 @@ const handleRegistrar = async () => {
           {usuarioSeleccionado ? (
             <>
               <button className="update-button" onClick={handleActualizar}>Actualizar</button>
-              <button className="delete-button" onClick={handleEliminarDesdeFormulario}>Eliminar</button>
+              <button
+                className="delete-button"
+                onClick={() => {
+                  if (usuarioSeleccionado.ESTATUS === '2') {
+                    handleHabilitar(usuarioSeleccionado.CORREO); // Función para habilitar usuarios inactivos
+                  } else {
+                    handleEliminarDesdeFormulario(); // Función para eliminar usuarios activos
+                  }
+                }}
+              >
+      {usuarioSeleccionado.ESTATUS === '2' ? 'Habilitar' : 'Eliminar'}
+    </button>
             </>
           ) : (
             <button className="register-button" onClick={handleRegistrar}>Registrar</button>

@@ -64,7 +64,7 @@ body {
   color: white;
   cursor: pointer;
   border-radius: 4px;
-  transition: all 0.3s ease;
+  /*transition: all 0.4s ease;*/
 }
 
 .filtros button:hover {
@@ -73,8 +73,8 @@ body {
 
 /* Botón de filtro seleccionado */
 .filtros button.filtro-activo {
-  background-color: #81d4fa;
-  color: #01579b;
+  background-color: #81d4fa !important;
+  color: #01579b !important;
   font-weight: bold;
 }
 

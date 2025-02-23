@@ -61,40 +61,19 @@ router.post('/', (req, res) => {
     });
 });
 
+router.put('/habilitar/:correo', (req, res) => {
+  const { correo } = req.params;
+  const query = 'UPDATE Usuarios SET ESTATUS = 1 WHERE CORREO = ?';
 
-
-
-// Actualizar un usuario existente
-/*
-router.put('/:correo', (req, res) => {
-    console.log('Datos recibidos para actualización:', req.body);
-
-    const { contraseña, perfil, estatus } = req.body;
-    const { correo } = req.params;
-
-    if (!correo || !perfil || !estatus) {
-        return res.status(400).json({ error: 'Todos los campos son obligatorios excepto la contraseña' });
+  db.query(query, [correo], (err, result) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
     }
-
-    let query, params;
-    if (contraseña) {
-        query = 'UPDATE Usuarios SET CONTRASEÑA = SHA2(?, 256), PERFIL = ?, ESTATUS = ? WHERE CORREO = ?';
-        params = [contraseña, perfil, estatus, correo];
-    } else {
-        query = 'UPDATE Usuarios SET PERFIL = ?, ESTATUS = ? WHERE CORREO = ?';
-        params = [perfil, estatus, correo];
-    }
-
-    db.query(query, params, (err, result) => {
-        if (err) {
-            console.error('Error en la actualización SQL:', err);
-            return res.status(500).json({ error: err.message });
-        }
-
-        res.json({ message: 'Usuario actualizado exitosamente' });
-    });
+    res.json({ message: 'Usuario habilitado exitosamente' });
+  });
 });
-*/
+
+
 router.put('/:correo', (req, res) => {
     console.log('Datos recibidos para actualización:', req.body);
 
