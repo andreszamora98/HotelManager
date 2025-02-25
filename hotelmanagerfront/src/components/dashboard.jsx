@@ -51,20 +51,6 @@ const Dashboard = () => {
 };
 
 
-/*
-  const handleEliminar = async (correo) => {
-    try {
-        const response = await fetch(`http://localhost:3001/users/${correo}`, { method: 'DELETE' });
-
-        const data = await response.json();
-        console.log('Respuesta del servidor:', data);
-
-        obtenerUsuarios(); // Recargar la lista para reflejar cambios
-    } catch (error) {
-        console.error('Error al eliminar usuario:', error);
-    }
-};
-*/
 const handleEliminar = async (correo) => {
   try {
     const response = await fetch(`http://localhost:3001/users/${correo}`, {
