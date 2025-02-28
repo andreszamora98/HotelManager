@@ -1,0 +1,164 @@
+
+.checkin-container {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  height: 100vh;
+  width: 100%;
+
+  justify-content: flex-start; 
+  padding-top: 70px; 
+}
+
+
+
+.top-footer {
+  background-color:#2c3e50;  /* Azul marino fuerte */
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 18px;
+  font-weight: bold;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;  /* Centra el contenido */
+  align-items: center;
+}
+
+.titulo-checkin {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 36px;
+  font-weight: bold;
+  color: white;
+  margin: 0; /* Elimina márgenes extras */
+}
+
+
+
+
+.checkin-content {
+  display: flex;
+  justify-content: space-between; /* Asegura separación entre los paneles */
+  align-items: flex-start;
+  width: 90%; /* Se aumenta el ancho total */
+  max-width: 1300px; /* Controlamos el tamaño en pantallas grandes */
+  margin: 0 auto; /* Centra los paneles */
+}
+
+/* FORMULARIO DE CHECK-IN */
+.form-container {
+  width: 45%; /* Se equilibra con la previsualización */
+  min-width: 400px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  height: 620px; /* Ajuste dinámico */
+  /*max-height: 650px;*/
+  overflow: auto; /* Solo muestra scroll si es necesario */
+  margin-left: -15%; /* Lo mueve más a la izquierda */
+  
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-container label {
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 10px;
+  color: #34495e;
+}
+
+.form-container input,
+.form-container select {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border 0.3s ease;
+}
+
+.form-container input:focus,
+.form-container select:focus {
+  border: 2px solid #3498db;
+  outline: none;
+}
+
+.generate-button {
+  margin-top: 20px;
+  padding: 12px;
+  background: #2c3e50;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.generate-button:hover {
+  background: #1a252f;
+}
+
+/* PREVISUALIZACIÓN DE FACTURA */
+.invoice-preview {
+  width: 30%;
+  min-width: 600px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 600px; /* Ajuste dinámico */
+  max-height: 650px;
+  overflow: auto;
+  margin-right: -15%; /* Lo mueve más a la derecha */
+}
+
+.pdf-preview {
+  width: 100%;
+  height: 450px;
+  border: none;
+}
+
+.download-button {
+  margin-top: 15px;
+  padding: 10px;
+  background: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+  width: 200px;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.download-button:hover {
+  background: #217dbb;
+}
+
+/* Se deshabilita el botón si no hay factura */
+.download-button.disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+

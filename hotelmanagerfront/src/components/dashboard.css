@@ -26,7 +26,7 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: #e0f7fa;
-  padding: 20px;
+  padding-top: 100px; 
 }
 
 /* Ajuste para que la tabla y formulario ocupen más espacio */
@@ -127,7 +127,7 @@ button:hover {
   background: white;
   padding: 20px;
   box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.1);
-  height: 500px;
+  height: 450px;
 }
 
 h2 {
@@ -217,6 +217,55 @@ h2 {
   animation: fadeInOut 1.5s linear;
 }
 
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 60px;
+  background-color: #424e5a;
+  transition: width 0.3s;
+  overflow: hidden;
+}
+
+.sidebar.open {
+  width: 200px;
+}
+
+.toggle-button {
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  color: white;
+}
+
+.menu {
+  list-style: none; 
+  padding: 0;
+}
+
+.menu li {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  color: white;
+  cursor: pointer;
+}
+
+.menu li:hover {
+  background-color: #44a0fc;
+}
+
+.menu li span {
+  display: none;
+  margin-left: 10px;
+}
+
+.sidebar.open .menu li span {
+  display: inline;
+}
+
+
 /* Animación de entrada y salida */
 @keyframes fadeInOut {
   0% { opacity: 0; transform: translate(-50%, -60%); }
@@ -225,6 +274,65 @@ h2 {
   100% { opacity: 0; transform: translate(-50%, -40%); }
 }
 
+.input-container {
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.input-container input,
+.input-container select {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.input-container input:focus,
+.input-container select:focus {
+  border-color: #3498db; /* Azul cuando se enfoca */
+  outline: none;
+}
+
+/* Borde rojo cuando hay error */
+.error-input {
+  border-color: red !important;
+}
+
+/* Mensaje de error */
+.error-text {
+  color: red;
+  font-size: 12px;
+  position: absolute;
+  top: 100%;
+  left: 5px;
+  margin-top: -15px;
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 1100px; /* Aumenta el ancho del campo de búsqueda */
+}
+
+.search-container input {
+  width: 100%; /* Se ajusta al contenedor */
+  padding: 12px 12px 12px 40px; /* Aumenta el padding izquierdo para dar más espacio a la lupa */
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Ajustar posición de la lupa */
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 40%;
+  transform: translateY(-55%); /* Subir el ícono */
+  color: #666;
+  font-size: 18px; /* Aumentar tamaño de la lupa si es necesario */
+}
 
 
 

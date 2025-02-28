@@ -1,0 +1,91 @@
+/* Estilos del sidebar */
+.sidebar {
+  position: fixed;
+  left: -250px;
+  top: 0;
+  height: 100%;
+  width: 250px;
+  background-color: #00376e;
+  transition: left 0.3s ease-in-out;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2) !important;
+  padding-top: 60px;
+  z-index: 1000;
+}
+
+.sidebar.open {
+  left: 0;
+}
+
+/* Fondo oscuro cuando la barra está abierta */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5) !important;
+  z-index: 900;
+}
+
+/* Botón de menú */
+.menu-button {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: #00376e;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1100;
+  transition: background 0.3s ease-in-out;
+}
+
+.menu-button:hover {
+  background: #00376e;
+}
+
+/* Estilos del menú */
+.menu {
+  list-style: none;
+  padding: 0;
+}
+
+.menu li {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.menu li:hover {
+  background-color: #00376e;
+}
+
+/* Resaltar el botón activo */
+.menu li.active {
+  background-color: #1abc9c; /* Verde agua */
+  font-weight: bold;
+}
+
+/* Iconos del menú */
+.menu li svg {
+  margin-right: 10px;
+}
+
+/* Mostrar texto solo cuando la barra está expandida */
+.show-text {
+  display: inline;
+}
+
+.hide-text {
+  display: none;
+}
+
+/* Asegurar que el texto se muestre en la versión expandida */
+.sidebar.open .menu li span {
+  display: inline;
+}
+

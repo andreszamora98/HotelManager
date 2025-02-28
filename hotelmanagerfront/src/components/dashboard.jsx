@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import './dashboard.css';
+import Sidebar from './sidebar';
+import { FaSearch } from "react-icons/fa";
 import logo from './logo.png'
+import Footer from './footer'
 const Dashboard = () => {
+
+  const [selectedOption, setSelectedOption] = useState("inicio");
+
   const [usuarios, setUsuarios] = useState([]);
   const [filtro, setFiltro] = useState('CORREO'); // Filtro por defecto
   const [busqueda, setBusqueda] = useState('');
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);
   const [mostrarInactivos, setMostrarInactivos] = useState(false);
   const [mostrarTodos, setMostrarTodos] = useState(false);
+  const [errors, setErrors] = useState({}); // Estado para los errores
 
   const [botonActivo, setBotonActivo] = useState(null); // null, 'inactivos' o 'todos'
   const [formData, setFormData] = useState({
@@ -17,6 +24,7 @@ const Dashboard = () => {
     PERFIL: '',
     ESTATUS: '',
     ALTA_REG: ''
+    
   });
     const [modalMensaje, setModalMensaje] = useState('');
     const [modalVisible, setModalVisible] = useState(false);
@@ -26,12 +34,15 @@ const Dashboard = () => {
   }, []);
 
   const mostrarModal = (mensaje) => {
-    setModalMensaje(mensaje);
-    setModalVisible(true);
-    setTimeout(() => {
-      setModalVisible(false);
-    }, 1500);
-  };
+  setModalMensaje(mensaje);
+  setModalVisible(true);
+
+  // Esperar más tiempo para que la animación de salida se complete
+  setTimeout(() => {
+    setModalVisible(false);
+  }, 1500); // Ajustado para coincidir con la animación
+};
+
 
   const obtenerUsuarios = async () => {
     try {
@@ -45,11 +56,34 @@ const Dashboard = () => {
         console.error('Error:', error);
     }
 };
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+const validateFields = () => {
+  const newErrors = {};
+  if (!formData.CORREO.trim()) newErrors.CORREO = '*Campo obligatorio*';
+  if (!formData.CONTRASEÑA.trim()) newErrors.CONTRASEÑA = '*Campo obligatorio*';
+  if (!formData.PERFIL) newErrors.PERFIL = '*Campo obligatorio*';
+  if (!formData.ESTATUS) newErrors.ESTATUS = '*Campo obligatorio*';
+
+  setErrors(newErrors);
+  return Object.keys(newErrors).length === 0; // Retorna true si no hay errores
 };
 
+const handleInputChange = (e) => {
+  const { name, value } = e.target;
+  setFormData({ ...formData, [name]: value });
+
+  // Si el usuario empieza a escribir, eliminar el error
+  if (value.trim() !== '') {
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
+  }
+};
+
+// Validar si el campo está vacío cuando el usuario sale del input
+const handleBlur = (e) => {
+  const { name, value } = e.target;
+  if (value.trim() === '') {
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: '*Campo obligatorio*' }));
+  }
+};
 
 const handleEliminar = async (correo) => {
   try {
@@ -99,7 +133,7 @@ const validarCorreo = async () => {
 };
 
 const handleRegistrar = async () => {
-    if (!formData.CORREO || !formData.PERFIL || !formData.ESTATUS) {
+    if (!validateFields()) {
         mostrarModal('Ningún campo puede estar vacío');
         return;
     }
@@ -123,7 +157,7 @@ const handleRegistrar = async () => {
         });
 
         const data = await response.json();
-        console.log('📩 Respuesta del servidor:', data);
+        console.log(' Respuesta del servidor:', data);
 
         if (!response.ok) {
             throw new Error(`Error: ${data.error}`);
@@ -131,15 +165,21 @@ const handleRegistrar = async () => {
 
         obtenerUsuarios();
         setFormData({ CORREO: '', CONTRASEÑA: '', PERFIL: '', ESTATUS: '', ALTA_REG: '' });
+        setErrors({}); // Limpiar errores después del registro exitoso
+        mostrarModal('Usuario registrado exitosamente');
 
     } catch (error) {
         mostrarModal('Error de formato en algún campo');
-        console.error("❌ Error al registrar usuario:", error);
+        console.error(" Error al registrar usuario:", error);
     }
 };
-  const handleActualizar = async () => {
+
+
+
+const handleActualizar = async () => {
     if (!usuarioSeleccionado) return;
-    if (!formData.CORREO || !formData.PERFIL || !formData.ESTATUS) {
+
+    if (!validateFields()) {
         mostrarModal('Ningún campo puede estar vacío');
         return;
     }
@@ -152,7 +192,7 @@ const handleRegistrar = async () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 correoNuevo: formData.CORREO,  // Nuevo campo
-                contraseña: formData.CONTRASEÑA, 
+                contraseña: formData.CONTRASEÑA,
                 perfil: formData.PERFIL,
                 estatus: formData.ESTATUS
             }),
@@ -168,6 +208,7 @@ const handleRegistrar = async () => {
         obtenerUsuarios();  // Recargar la lista de usuarios actualizada
         setUsuarioSeleccionado(null);
         setFormData({ CORREO: '', CONTRASEÑA: '', PERFIL: '', ESTATUS: '', ALTA_REG: '' });
+        setErrors({}); // Limpiar errores después de la actualización exitosa
         mostrarModal('Usuario actualizado exitosamente');
 
     } catch (error) {
@@ -238,15 +279,19 @@ const handleLimpiarFormulario = () => {
 
   return (
     <div>
-    <h1 className="titulo-dashboard"> GESTOR DE USUARIOS </h1>
+    <Footer title="GESTOR DE USUARIOS" />
     {/* <img src={logo} alt="Logo del Hotel" className="logo" />*/}
     <div className="dashboard-container">
+     <Sidebar />
+      <div className="content">
+         {/* <h2>Bienvenido al Dashboard</h2> */}
+      </div>
     {modalVisible && (
         <div className="modal">
           <p>{modalMensaje}</p>
         </div>
       )}   
-      <div className="panel-izquierdo"style={{ flex: 2.5, marginLeft: '-200px' }}>
+      <div className="panel-izquierdo"style={{ flex: 2.5, marginLeft: '-150px' }}>
         <div className="filtros-container">
           <h3>Filtrar Búsqueda</h3>
           <div className="filtros">
@@ -256,7 +301,8 @@ const handleLimpiarFormulario = () => {
                 onClick={() => setFiltro(campo)} 
                 className={filtro === campo ? 'filtro-activo' : ''}
               >
-                {campo.toUpperCase()}
+                {campo === 'ALTA_REG' ? 'FECHA DE REGISTRO' : campo.toUpperCase()}
+                {/*{campo.toUpperCase()}*/}
               </button>
             ))}
             <button 
@@ -282,19 +328,22 @@ const handleLimpiarFormulario = () => {
             </button>
           </div>
         </div>
-        <input
-          type="text"
-          placeholder="Buscar..."
-          value={busqueda}
-          onChange={(e) => setBusqueda(e.target.value)}
-        />
+        <div className="search-container">
+  <FaSearch className="search-icon" />
+  <input 
+    type="text" 
+    placeholder="Buscar..." 
+    value={busqueda} 
+    onChange={(e) => setBusqueda(e.target.value)}
+  />
+</div>
         <table>
           <thead>
             <tr> 
               <th>Correo</th>
               <th>Perfil</th>
               <th>Estatus</th>
-              <th>Alta Reg</th>
+              <th>Fecha de registro</th>
               <th>Acciones</th>
             </tr>
           </thead>
@@ -335,45 +384,114 @@ const handleLimpiarFormulario = () => {
       <div className="panel-derecho" style={{ flex: 1, marginRight: '280px' }}>
         <h2>{usuarioSeleccionado ? 'Editar Usuario' : 'Registrar Usuario'}</h2>
         
-        <input type="text" name="CORREO" value={formData.CORREO} onChange={handleInputChange} placeholder="Correo" />
-        <input type="password" name="CONTRASEÑA" value={formData.CONTRASEÑA} onChange={handleInputChange} placeholder="Contraseña" />
-        {/* <input type="text" name="PERFIL" value={formData.PERFIL} onChange={handleInputChange} placeholder="Perfil" /> */}
-        <select name="PERFIL" value={formData.PERFIL} onChange={handleInputChange}>
-            <option value="">Seleccione un perfil</option>
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-        </select>
-        {/* <input type="text" name="ESTATUS" value={formData.ESTATUS} onChange={handleInputChange} placeholder="Estatus" /> */}
-        <select name="ESTATUS" value={formData.ESTATUS} onChange={handleInputChange}>
-            <option value="">Seleccione un estatus</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-        </select>
+        {/* Campo de CORREO */}
+  <div className="input-container">
+    <input 
+      type="text" 
+      name="CORREO" 
+      value={formData.CORREO} 
+      onChange={handleInputChange} 
+      onBlur={handleBlur} 
+      placeholder="Correo" 
+      className={errors.CORREO ? 'error-input' : ''}
+    />
+    {errors.CORREO && <p className="error-text">{errors.CORREO}</p>}
+  </div>
+
+  {/* Campo de CONTRASEÑA */}
+  <div className="input-container">
+    <input 
+      type="password" 
+      name="CONTRASEÑA" 
+      value={formData.CONTRASEÑA} 
+      onChange={handleInputChange} 
+      onBlur={handleBlur} 
+      placeholder="Contraseña" 
+      className={errors.CONTRASEÑA ? 'error-input' : ''}
+    />
+    {errors.CONTRASEÑA && <p className="error-text">{errors.CONTRASEÑA}</p>}
+  </div>
+
+  {/* Campo de PERFIL */}
+  <div className="input-container">
+    <select 
+      name="PERFIL" 
+      value={formData.PERFIL} 
+      onChange={handleInputChange} 
+      onBlur={handleBlur} 
+      className={errors.PERFIL ? 'error-input' : ''}
+    >
+      <option value="">Seleccione un perfil</option>
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+    </select>
+    {errors.PERFIL && <p className="error-text">{errors.PERFIL}</p>}
+  </div>
+
+  {/* Campo de ESTATUS */}
+  <div className="input-container">
+    <select 
+      name="ESTATUS" 
+      value={formData.ESTATUS} 
+      onChange={handleInputChange} 
+      onBlur={handleBlur} 
+      className={errors.ESTATUS ? 'error-input' : ''}
+    >
+      <option value="">Seleccione un estatus</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+    </select>
+    {errors.ESTATUS && <p className="error-text">{errors.ESTATUS}</p>}
+  </div>
 
         {/* <input type="text" name="ALTA_REG" value={formData.ALTA_REG} onChange={handleInputChange} placeholder="Alta Registro" disabled /> */}
         <div className="button-group">
-          {usuarioSeleccionado ? (
-            <>
-              <button className="update-button" onClick={handleActualizar}>Actualizar</button>
-              <button
-                className="delete-button"
-                onClick={() => {
-                  if (usuarioSeleccionado.ESTATUS === '2') {
-                    handleHabilitar(usuarioSeleccionado.CORREO); // Función para habilitar usuarios inactivos
-                  } else {
-                    handleEliminarDesdeFormulario(); // Función para eliminar usuarios activos
-                  }
-                }}
-              >
-      {usuarioSeleccionado.ESTATUS === '2' ? 'Habilitar' : 'Eliminar'}
+  {usuarioSeleccionado ? (
+    <>
+      <button 
+        className="update-button" 
+        onClick={() => {
+          if (validateFields()) {
+            handleActualizar();
+          } else {
+            mostrarModal('Ningún campo puede estar vacío');
+          }
+        }}
+      >
+        Actualizar
+      </button>
+
+      <button
+        className="delete-button"
+        onClick={() => {
+          if (usuarioSeleccionado.ESTATUS === '2') {
+            handleHabilitar(usuarioSeleccionado.CORREO); // Función para habilitar usuarios inactivos
+          } else {
+            handleEliminarDesdeFormulario(); // Función para eliminar usuarios activos
+          }
+        }}
+      >
+        {usuarioSeleccionado.ESTATUS === '2' ? 'Habilitar' : 'Eliminar'}
+      </button>
+    </>
+  ) : (
+    <button 
+      className="register-button" 
+      onClick={() => {
+        if (validateFields()) {
+          handleRegistrar();
+        } else {
+          mostrarModal('Ningún campo puede estar vacío');
+        }
+      }}
+    >
+      Registrar
     </button>
-            </>
-          ) : (
-            <button className="register-button" onClick={handleRegistrar}>Registrar</button>
-          )}
-          <button className="clear-button" onClick={handleLimpiarFormulario}>Limpiar</button>
-        </div>
+  )}
+  <button className="clear-button" onClick={handleLimpiarFormulario}>Limpiar</button>
+</div>
+
       </div>
     </div>
     </div>

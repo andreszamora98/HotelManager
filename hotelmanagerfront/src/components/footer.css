@@ -1,0 +1,24 @@
+.top-footer {
+  background-color: #00376e !important; /* Azul marino fuerte */
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  font-size: 18px;
+  font-weight: bold;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.titulo-checkin {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 36px;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+}
