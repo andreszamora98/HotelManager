@@ -1,0 +1,13 @@
+NUMERO_HABITACION,Tipo,Capacidad,PRECIO_POR_NOCHE,Estado,Descripcion
+101,estandar,2,1500,disponible,Habitacion estandar con vista al jardin
+102,suite,4,2500,ocupada,Suite con jacuzzi privado
+103,presidencial,6,5000,disponible,Habitacion presidencial con terraza
+104,estandar,2,1500,mantenimiento,Habitacion estandar con vista a la ciudad
+201,suite,4,2500,disponible,Suite con balcon y vista al mar
+202,presidencial,6,5000,ocupada,Habitacion presidencial con piscina privada
+203,estandar,2,1500,disponible,Habitacion estandar con cama king size
+204,suite,4,2500,mantenimiento,Suite con acceso a spa privado
+301,presidencial,6,5000,disponible,Suite con balcon y vista al mar
+302,estandar,2,1500,ocupada,Suite con balcon y vista al mar
+,,,,,
+,,,,,

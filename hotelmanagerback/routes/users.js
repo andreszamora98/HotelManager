@@ -30,7 +30,7 @@ router.get('/validar/:correo', (req, res) => {
 
 
 router.get('/', (req, res) => {
-  db.query('SELECT CORREO, PERFIL, ESTATUS, ALTA_REG FROM Usuarios', (err, results) => {
+  db.query('SELECT CORREO, NOMBRE_CLIENTE, RFC, DIRECCION, PERFIL, ESTATUS, ALTA_REG FROM Usuarios', (err, results) => {
     if (err) {
       return res.status(500).json({ error: err.message });
     }
@@ -43,23 +43,29 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     console.log('Datos recibidos:', req.body);
 
-    const { correo, contraseña, perfil, estatus } = req.body;
+    const { correo, nombre_cliente, rfc, direccion, contraseña, perfil, estatus } = req.body;
 
-    if (!correo || !contraseña || !perfil || !estatus) {
+    if (!correo || !nombre_cliente || !rfc || !direccion || !contraseña || !perfil || !estatus) {
         return res.status(400).json({ error: 'Todos los campos son obligatorios' });
     }
 
-    const query = 'INSERT INTO Usuarios (CORREO, CONTRASEÑA, PERFIL, ESTATUS, ALTA_REG) VALUES (?, SHA2(?, 256), ?, ?, NOW())';
+    const query = `
+        INSERT INTO Usuarios (CORREO, NOMBRE_CLIENTE, RFC, DIRECCION, CONTRASEÑA, PERFIL, ESTATUS, ALTA_REG) 
+        VALUES (?, ?, ?, ?, SHA2(?, 256), ?, ?, NOW())`;
 
-    db.query(query, [correo, contraseña, perfil, estatus], (err, result) => {
+    db.query(query, [correo, nombre_cliente, rfc, direccion, contraseña, perfil, estatus], (err, result) => {
         if (err) {
             console.error('Error en la consulta SQL:', err);
+            if (err.code === 'ER_DUP_ENTRY') {
+                return res.status(400).json({ error: 'El correo ya está registrado' });
+            }
             return res.status(500).json({ error: err.message });
         }
 
         res.json({ message: 'Usuario registrado exitosamente' });
     });
 });
+
 
 router.put('/habilitar/:correo', (req, res) => {
   const { correo } = req.params;
@@ -77,48 +83,39 @@ router.put('/habilitar/:correo', (req, res) => {
 router.put('/:correo', (req, res) => {
     console.log('Datos recibidos para actualización:', req.body);
 
-    const { correoNuevo, contraseña, perfil, estatus } = req.body;
+    const { correoNuevo, nombre_cliente, rfc, direccion, contraseña, perfil, estatus } = req.body;
     const { correo } = req.params;
 
-    if (!correo || !correoNuevo || !perfil || !estatus) {
+    if (!correo || !correoNuevo || !nombre_cliente || !rfc || !direccion || !perfil || !estatus) {
         return res.status(400).json({ error: 'Todos los campos son obligatorios excepto la contraseña' });
     }
 
-    // Verificar si el nuevo correo ya existe en la base de datos
-    const queryVerificar = 'SELECT CORREO FROM Usuarios WHERE CORREO = ? AND CORREO != ?';
-    
-    db.query(queryVerificar, [correoNuevo, correo], (err, result) => {
+    let query, params;
+    if (contraseña) {
+        query = `
+            UPDATE Usuarios 
+            SET CORREO = ?, NOMBRE_CLIENTE = ?, RFC = ?, DIRECCION = ?, CONTRASEÑA = SHA2(?, 256), PERFIL = ?, ESTATUS = ? 
+            WHERE CORREO = ?`;
+        params = [correoNuevo, nombre_cliente, rfc, direccion, contraseña, perfil, estatus, correo];
+    } else {
+        query = `
+            UPDATE Usuarios 
+            SET CORREO = ?, NOMBRE_CLIENTE = ?, RFC = ?, DIRECCION = ?, PERFIL = ?, ESTATUS = ? 
+            WHERE CORREO = ?`;
+        params = [correoNuevo, nombre_cliente, rfc, direccion, perfil, estatus, correo];
+    }
+
+    db.query(query, params, (err, result) => {
         if (err) {
-            console.error('Error en la validación del correo:', err);
-            return res.status(500).json({ error: 'Error en la base de datos' });
+            console.error('Error en la actualización SQL:', err);
+            return res.status(500).json({ error: err.message });
         }
 
-        if (result.length > 0) {
-            return res.status(400).json({ error: 'El correo ya está en uso' });
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: 'No se encontró el usuario o no se realizaron cambios' });
         }
 
-        // Si el nuevo correo no está duplicado, proceder con la actualización
-        let query, params;
-        if (contraseña) {
-            query = 'UPDATE Usuarios SET CORREO = ?, CONTRASEÑA = SHA2(?, 256), PERFIL = ?, ESTATUS = ? WHERE CORREO = ?';
-            params = [correoNuevo, contraseña, perfil, estatus, correo];
-        } else {
-            query = 'UPDATE Usuarios SET CORREO = ?, PERFIL = ?, ESTATUS = ? WHERE CORREO = ?';
-            params = [correoNuevo, perfil, estatus, correo];
-        }
-
-        db.query(query, params, (err, result) => {
-            if (err) {
-                console.error('Error en la actualización SQL:', err);
-                return res.status(500).json({ error: err.message });
-            }
-
-            if (result.affectedRows === 0) {
-                return res.status(404).json({ error: 'No se encontró el usuario o no se realizaron cambios' });
-            }
-
-            res.json({ message: 'Usuario actualizado exitosamente' });
-        });
+        res.json({ message: 'Usuario actualizado exitosamente' });
     });
 });
 

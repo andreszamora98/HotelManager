@@ -1,0 +1,228 @@
+/* 📌 Contenedor principal */
+.habitaciones-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  justify-content: flex-start;
+  padding-top: 70px;
+}
+
+/* 📌 Contenido dividido en dos paneles */
+.habitaciones-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 90%;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* 📌 Panel Izquierdo: Registro Individual */
+.form-container {
+  width: 50%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  height: 650px;
+}
+
+.form-container h2 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #01579b;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.form-container label {
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 10px;
+  color: #01579b;
+}
+
+.form-container input,
+.form-container select,
+.form-container textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border 0.3s ease;
+  margin-bottom: 5px;
+  min-height: 45px; 
+}
+
+/*
+.form-container textarea {
+  resize: none;
+  height: 50px; 
+  width: 550px;
+}
+*/
+.form-container textarea {
+  width: 95%; 
+  max-width: 550px; 
+  height: 80px;  
+  resize: vertical; 
+}
+
+
+.form-container input:focus,
+.form-container select:focus,
+.form-container textarea:focus {
+  border: 2px solid #3498db;
+  outline: none;
+}
+
+.form-container button {
+  margin-top: 20px;
+  padding: 12px;
+  background: #0288d1;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.form-container button:hover {
+  background: #0277bd;
+}
+
+/* 📌 Panel Derecho: Carga Masiva */
+.upload-container {
+  width: 55%;
+  background: white;
+  padding: 40px;
+  padding-top: -200px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  margin-right: -15%;
+}
+
+.upload-container h2 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #01579b;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.upload-container input {
+  margin-top: 10px;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border 0.3s ease;
+  width: 100%;
+}
+
+.upload-container button {
+  margin-top: 20px;
+  padding: 12px;
+  background: #0288d1;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.upload-container button:hover {
+  background: #0277bd;
+}
+
+/* 📌 Mensajes de estado */
+.message {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: green;
+  text-align: center;
+}
+
+/* Borde rojo cuando hay error */
+.error-input {
+  border-color: red !important;
+  min-height: 5px;
+}
+
+/* Mensaje de error */
+/*
+.error-text {
+  color: red;
+  font-size: 12px;
+  position: absolute;
+  top: 100%;
+  left: 5px;
+  margin-top: -15px;
+}
+  */
+
+.error-text {
+  color: red;
+  font-size: 12px;
+  position: relative;
+  top: auto;
+  left: auto;
+  margin-top: 2px; 
+  display: block;
+  min-height: 18px; 
+}
+
+
+/* 📌 Ocultar el input file original */
+.hidden-input {
+  display: none;
+}
+
+/* 📌 Estilo del botón de carga con icono */
+.custom-file-upload {
+  display: inline-block;
+  background-color: #0288d1;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  text-align: center;
+  width: 100%;
+}
+
+/* 📌 Cambio de color al pasar el mouse */
+.custom-file-upload:hover {
+  background-color: #0277bd;
+}
+
+.load-db-button {
+  margin-top: 15px;
+  padding: 12px;
+  background: #0288d1;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.load-db-button:hover {
+  background: #0277bd;
+}
+
+

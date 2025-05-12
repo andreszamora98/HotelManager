@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Importamos useNavigate
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './login.css';
 import Modal from './modal';
-import logo from './logo.png'
-
+import logo from './logo.png';
 
 const Login = () => {
   const [correo, setCorreo] = useState('');
   const [contraseña, setContraseña] = useState('');
   const [modalMessage, setModalMessage] = useState(null);
-  const navigate = useNavigate(); // Hook para la navegación
+  const [redirectPath, setRedirectPath] = useState(null); // Estado para la redirección
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (redirectPath) {
+      setTimeout(() => {
+        navigate(redirectPath);
+      }, 1500);
+    }
+  }, [redirectPath, navigate]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -17,16 +25,29 @@ const Login = () => {
     try {
       const response = await fetch('http://localhost:3001/auth/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ correo, contraseña }),
       });
 
       if (response.ok) {
         const data = await response.json();
         setModalMessage(data.message);
-        setTimeout(() => navigate('/dashboard'), 1500); // Redirigir después de 3s
+
+        // Guardar el perfil en localStorage
+        localStorage.setItem('perfil', data.perfil);
+        // Al iniciar sesión correctamente
+        localStorage.setItem('nombreUsuario', data.usuario.NOMBRE_CLIENTE ); 
+
+
+        // Determinar la ruta de redirección según el perfil
+        let path = '/';
+        if (data.perfil === 'A') path = '/dashboard';
+        else if (data.perfil === 'B') path = '/mantenimiento';
+        else if (data.perfil === 'C') path = '/checkin';
+        else if (data.perfil === 'D') path = '/limpieza';
+
+        setRedirectPath(path); // Activar la redirección
+
       } else if (response.status === 401) {
         setModalMessage('No tienes privilegios suficientes');
       } else {

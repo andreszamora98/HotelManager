@@ -1,11 +1,25 @@
 body {
   font-family: 'Inter', sans-serif;
 }
-
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  animation: fadeInOut 1.5s linear;
+  z-index: 9999;
+}
 .titulo-dashboard /*, .logo*/ {
   font-family: 'Montserrat', sans-serif;
   text-align: center;
-  font-size: 36px;
+  font-size: 26px;
   color: #01579b; /* Azul marino */
   font-weight: bold;
   margin-bottom: 20px;
@@ -21,21 +35,29 @@ body {
     margin-left: 10px; 
 }
 */
+
 .dashboard-container {
   display: flex;
   width: 100vw;
   height: 100vh;
   background-color: #e0f7fa;
-  padding-top: 100px; 
-}
+  padding-top: 100px;
+  max-width: none;  
+  justify-content: flex-start; /* 🔥 Asegura que los elementos se alineen a la izquierda */
+  align-items: stretch; /* 🔥 Asegura que los paneles ocupen toda la altura */
 
-/* Ajuste para que la tabla y formulario ocupen más espacio */
+}
 .panel-izquierdo {
-  flex: 2;
-  margin-right: 20px;
+  margin-top: -35px;
+  flex: 3; /* 🔥 Aumentamos el peso para que crezca más */
+  min-width: 70%; /* 🔥 Se asegura de que ocupe más espacio */
+  max-width: 75%; /* 🔥 Evita que se haga demasiado grande */
+  padding: 10px; /* 🔥 Mejora la distribución interna */
+  transform: translateX(-40px);
 }
 
-/* Contenedor de los filtros */
+
+
 .filtros-container {
   font-family: 'Poppins', sans-serif;
   background: white;
@@ -45,17 +67,21 @@ body {
   margin-bottom: 15px;
   text-align: center;
 }
+  .filtros {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+
+
 
 .filtros-container h3 {
   margin-bottom: 10px;
   color: #01579b;
 }
 
-.filtros {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
+
 
 .filtros button {
   padding: 8px 12px;
@@ -84,6 +110,13 @@ input[type="text"] {
   margin-bottom: 15px;
   border: 1px solid #81d4fa;
   border-radius: 4px;
+}
+.table-container {
+  max-height: 400px; /* Define la altura máxima de la tabla */
+  overflow-y: auto; /* Agrega el scroll vertical cuando se excede */
+  overflow-x: auto; /* Permite scroll horizontal si es necesario */
+  width: 100%; /* Asegura que no se expanda más allá del contenedor */
+  border-radius: 8px; /* Bordes redondeados para mejor estética */
 }
 
 table {
@@ -124,10 +157,16 @@ button:hover {
 
 /* Panel derecho: formulario de registro */
 .panel-derecho {
+  flex: 2; /* 🔥 Aumenta su tamaño relativo dentro del contenedor */
+  min-width: 21%; /* 🔥 Asegura que el panel derecho se expanda */
+  max-width: 15%; /* 🔥 Evita que crezca demasiado */
+  margin-top: -25px;
   background: white;
   padding: 20px;
   box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.1);
-  height: 450px;
+  height: 600px;
+  margin-bottom: 90px;
+  overflow-y: auto; /* Habilita el scroll vertical si el contenido crece */ 
 }
 
 h2 {
@@ -142,6 +181,7 @@ h2 {
   margin-bottom: 20px;
   border: 1px solid #81d4fa;
   border-radius: 4px;
+  margin-bottom: 5px; 
 }
 
 .panel-derecho .button-group {
@@ -167,6 +207,11 @@ h2 {
 .panel-derecho .clear-button:hover {
   background-color: #0277bd;
 }
+.disabled-button {
+  background-color: #d3d3d3 !important; /* Gris claro */
+  cursor: not-allowed !important; /* Cursor indicando que está inactivo */
+  pointer-events: none; 
+}
 
 
 /* Configuraciones para SELECT */ 
@@ -181,6 +226,10 @@ h2 {
   color: #0288d1;
   cursor: pointer;
 }
+.panel-derecho select + .error-text {
+  margin-top: -15px; /* Ajuste solo para los select */
+}
+
 
 /* Estilo cuando el select está enfocado */
 .panel-derecho select:focus {
@@ -200,22 +249,6 @@ h2 {
   color: #81d4fa;
 }
 
-
-/* Estilos para el modal */
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 15px 30px;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-  animation: fadeInOut 1.5s linear;
-}
 
 .sidebar {
   position: fixed;
@@ -297,9 +330,12 @@ h2 {
 /* Borde rojo cuando hay error */
 .error-input {
   border-color: red !important;
+  display: block; /* Asegura que el mensaje se muestre en una nueva línea */
+  min-height: 5px;
 }
 
 /* Mensaje de error */
+/*
 .error-text {
   color: red;
   font-size: 12px;
@@ -307,13 +343,24 @@ h2 {
   top: 100%;
   left: 5px;
   margin-top: -15px;
+}*/
+.error-text {
+  color: red;
+  font-size: 12px;
+  position: relative; 
+  top: auto;
+  left: auto;
+  margin-top: -30px;
+  display: block; /* Asegura que el mensaje se muestre en una nueva línea */
+  min-height: 5px; /* Igualar altura mínima en todos los casos */
 }
+
 
 .search-container {
   position: relative;
   display: flex;
   align-items: center;
-  width: 1100px; /* Aumenta el ancho del campo de búsqueda */
+  width: 1198px; /* Aumenta el ancho del campo de búsqueda */
 }
 
 .search-container input {
@@ -334,5 +381,133 @@ h2 {
   font-size: 18px; /* Aumentar tamaño de la lupa si es necesario */
 }
 
+/* Modal de reporte: fondo oscuro exclusivo */
+.report-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo negro con 50% de opacidad */
+  z-index: 9998;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
 
+/* Clase para desvanecer el backdrop */
+.report-backdrop.fade-out {
+  opacity: 0;
+}
+
+/* Modal de reporte único */
+.report-modal {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 30px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  color: #333;
+  padding: 20px 40px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  text-align: center;
+}
+
+/* Clase para desvanecer el modal */
+.report-modal.fade-out {
+  opacity: 0;
+}
+
+/* Animación de entrada exclusiva para este modal (opcional) */
+@keyframes slideDownReport {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+.report-modal {
+  animation: slideDownReport 0.5s ease-out;
+}
+
+/* Estilos para el contenido del modal de reporte */
+.report-modal h3 {
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #01579b;
+}
+
+.report-modal button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #3498db;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.report-modal button:hover {
+  background-color: #2980b9;
+}
+
+/* Contenedor que pone en fila los 2 botones de reporte */
+.buttons-row {
+  display: flex;           /* Alinea en fila */
+  justify-content: center; /* Centra horizontalmente */
+  gap: 20px;               /* Espacio entre botones */
+  margin-bottom: 15px;     /* Separación con el botón de cancelar */
+}
+
+/* Botones de reporte con ícono arriba y texto abajo */
+.btn-reporte {
+  display: flex;
+  flex-direction: column; /* Ícono arriba del texto */
+  align-items: center;
+  justify-content: center;
+  padding: 15px 20px;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+}
+.btn-reporte:hover {
+  background-color: #2980b9;
+}
+.btn-reporte span {
+  margin-top: 5px; /* Un poco de espacio entre el ícono y el texto */
+}
+
+.btn-cancelar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;      /* Ajusta el padding para controlar el ancho */
+  background-color: #e74c3c !important; /* Rojo */
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 16px;
+  width: 140px;            /* Fíjalo a un ancho para hacerlo más corto */
+}
+
+.btn-cancelar:hover {
+  background-color: #c0392b;
+}
 

@@ -1,18 +1,19 @@
 .top-footer {
   background-color: #00376e !important; /* Azul marino fuerte */
   color: white;
-  text-align: center;
-  padding: 20px 0;
+  padding: 20px;
   font-size: 18px;
   font-weight: bold;
   position: fixed;
   width: 100%;
-  top: 0;
+  top: 0; /* Mantenemos la altura fija del footer */
   left: 0;
   z-index: 1000;
   display: flex;
-  justify-content: center;
+  justify-content: space-between; /* Distribuye elementos */
   align-items: center;
+  text-align: center;
+  height: 40px; /* Asegura una altura suficiente para bajar elementos */
 }
 
 .titulo-checkin {
@@ -20,5 +21,35 @@
   font-size: 36px;
   font-weight: bold;
   color: white;
-  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+  margin-top: 15px; /* 🔹 Baja el título */
+}
+
+.report-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 1.2rem;
+  padding: 5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  transition: transform 0.2s ease-in-out;
+ 
+  margin-right: 60px;
+  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.report-button:hover {
+  transform: scale(1.1);
+  color: #ffcc00;
+}
+
+.report-icon {
+  font-size: 1.5rem;
 }

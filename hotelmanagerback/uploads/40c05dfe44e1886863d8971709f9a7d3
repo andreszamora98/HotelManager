@@ -1,0 +1,11 @@
+NUMERO_HABITACION,TIPO,CAPACIDAD,PRECIO_POR_NOCHE,ESTADO,DESCRIPCION
+105,estandar,2,1600,disponible,Habitación estándar con vista al lago
+106,suite,3,2800,ocupada,Suite con jacuzzi y terraza privada
+107,presidencial,5,5200,disponible,Habitación presidencial con gimnasio
+108,estandar,2,1600,mantenimiento,Habitación estándar con escritorio de trabajo
+205,suite,4,2700,disponible,Suite con vista panorámica a la ciudad
+206,presidencial,6,5400,ocupada,Habitación presidencial con sala de conferencias
+207,estandar,2,1600,disponible,Habitación estándar con acceso al spa
+208,suite,3,2900,mantenimiento,Suite con sala de cine privada
+309,presidencial,6,5600,disponible,Habitación presidencial con acceso VIP al lounge
+310,estandar,2,1600,ocupada,Habitación estándar con decoración minimalista

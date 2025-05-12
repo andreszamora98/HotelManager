@@ -1,0 +1,137 @@
+/* 📌 Contenedor principal */
+.limpieza-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  justify-content: flex-start;
+  padding-top: 70px;
+  background-color: #e0f7fa;
+}
+
+/* 📌 Contenedor de los paneles */
+.limpieza-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 90%;
+  max-width: 1300px;
+  margin: 0 auto;
+  gap: 90px; /* 📌 Espacio entre los paneles */
+  height: 85vh;
+}
+
+/* 📌 Panel de limpieza */
+.limpieza-dashboard-panel {
+  width: 90%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+}
+
+/* 📌 Título del panel */
+.limpieza-dashboard-panel h2 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #01579b;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* 📌 Select para filtrar habitaciones */
+.limpieza-dashboard-panel select {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* 📌 Tabla con altura fija y scroll */
+.limpieza-table-container {
+  max-height: 500px;
+  overflow-y: auto;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  flex-grow: 1;
+}
+
+.limpieza-dashboard-panel table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.limpieza-dashboard-panel th, .limpieza-dashboard-panel td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.limpieza-dashboard-panel th {
+  background-color: #0288d1;
+  color: white;
+}
+
+/* 📌 Panel de incidencias */
+.limpieza-registro {
+  width: 35%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: height 0.3s ease-in-out; /* Se ajusta al contenido */
+}
+
+/* 📌 Estilos de títulos */
+.limpieza-registro h3 {
+  font-size: 20px;
+  color: #01579b;
+  text-align: center;
+}
+
+/* 📌 Inputs y Selects */
+.limpieza-registro select,
+.limpieza-registro input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 5px; /* Reduce la separación */
+}
+
+/* 📌 Botón de registro */
+.limpieza-registro button {
+  padding: 12px;
+  background: #0288d1;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.limpieza-registro button:hover {
+  background: #0277bd;
+}
+
+.input-error {
+  border: 2px solid red !important;
+  background-color: #ffffff !important;
+}
+
+.error-text {
+  color: red;
+  font-size: 12px;
+  margin-top: 0px; /* Reduce espacio superior */
+  margin-bottom: 3px; /* Reduce espacio inferior */
+  text-align: left;
+  padding-left: 2px;
+}

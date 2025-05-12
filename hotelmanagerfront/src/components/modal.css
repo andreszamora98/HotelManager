@@ -1,45 +1,7 @@
-/*
-.modal-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@font-face {
+  font-family: 'CMU Serif';
+  src: url('/fonts/cmunrm.ttf') format('truetype'); /* Ruta a la fuente descargada */
 }
-
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.modal-content p {
-  margin-bottom: 20px;
-  font-size: 30px;
-  color: #01579b;
-  font-family: 'Montserrat', sans-serif;
-}
-
-.modal-content button {
-  padding: 10px 20px;
-  background-color: #0288d1;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.modal-content button:hover {
-  background-color: #0277bd;
-}
-*/
 .modal-backdrop {
   position: fixed;
   top: 0;
@@ -52,6 +14,7 @@
   justify-content: center;
   opacity: 1;
   transition: opacity 0.5s ease-in-out;
+  z-index: 10000;
 }
 
 /* Animación de salida */
@@ -59,6 +22,7 @@
   opacity: 0;
 }
 
+/*
 .modal-content {
   background: white;
   padding: 20px;
@@ -68,6 +32,29 @@
   transform: translateY(0);
   transition: transform 0.5s ease-in-out;
 }
+  */
+ .modal-content {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px; /* Aumenta el tamaño de la fuente */
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  transform: translateY(0);
+  transition: transform 0.5s ease-in-out;
+  width: 30%;
+  max-width: 600px;
+  z-index: 10001;
+}
+
+/* Si quieres que el mensaje dentro del modal tenga un tamaño aún mayor */
+.modal-content p {
+  font-size: 30px; /* Ajusta el tamaño del texto del mensaje */
+  font-weight: bold; /* Hace que el texto sea más grueso */
+  color: #1d52a6; /* Color de texto oscuro para mejor visibilidad */
+}
+
 
 /* Animación de salida */
 .modal-content.slide-down {

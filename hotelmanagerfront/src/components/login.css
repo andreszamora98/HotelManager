@@ -87,9 +87,9 @@ button:hover {
     display: block;
     margin: 0 auto;
     width: 100%; /* Se ajusta al contenedor */
-    max-width: 180px; /* Ancho máximo permitido */
+    max-width: 250px; /* Ancho máximo permitido */
     height: auto; /* Mantiene la proporción */
-    max-height: 120px; /* Altura máxima */
+    max-height: 250px; /* Altura máxima */
     object-fit: contain; /* Evita recortes */
 }
 

@@ -1,0 +1,15 @@
+# Ignorar dependencias y módulos instalados
+/hotelmanagerback/node_modules/
+/hotelmanagerfront/node_modules/
+
+# Ignorar settings de IDE/editor
+/.idea/
+/hotelmanagerback/.idea/
+/hotelmanagerfront/.idea/
+
+# Otras cosas comunes
+.DS_Store
+Thumbs.db
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

@@ -11,35 +11,6 @@
 }
 
 
-
-.top-footer {
-  background-color:#2c3e50;  /* Azul marino fuerte */
-  color: white;
-  text-align: center;
-  padding: 20px 0;
-  font-size: 18px;
-  font-weight: bold;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1000;
-  display: flex;
-  justify-content: center;  /* Centra el contenido */
-  align-items: center;
-}
-
-.titulo-checkin {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 36px;
-  font-weight: bold;
-  color: white;
-  margin: 0; /* Elimina márgenes extras */
-}
-
-
-
-
 .checkin-content {
   display: flex;
   justify-content: space-between; /* Asegura separación entre los paneles */
@@ -51,7 +22,7 @@
 
 /* FORMULARIO DE CHECK-IN */
 .form-container {
-  width: 45%; /* Se equilibra con la previsualización */
+  width: 50%; /* Se equilibra con la previsualización */
   min-width: 400px;
   background: white;
   padding: 20px;
@@ -69,16 +40,19 @@
 .title {
   font-size: 24px;
   font-weight: bold;
-  color: #2c3e50;
+  color: #01579b;
   margin-bottom: 20px;
   text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  
 }
 
 .form-container label {
   font-weight: bold;
   font-size: 14px;
   margin-top: 10px;
-  color: #34495e;
+  color: #01579b;
 }
 
 .form-container input,
@@ -100,7 +74,7 @@
 .generate-button {
   margin-top: 20px;
   padding: 12px;
-  background: #2c3e50;
+  background: #0288d1;
   color: white;
   font-size: 16px;
   border: none;
@@ -110,13 +84,13 @@
 }
 
 .generate-button:hover {
-  background: #1a252f;
+  background: #0288d1;
 }
 
 /* PREVISUALIZACIÓN DE FACTURA */
 .invoice-preview {
-  width: 30%;
-  min-width: 600px;
+  width: 50%;
+  min-width: 610px;
   background: white;
   padding: 20px;
   border-radius: 10px;
@@ -139,7 +113,7 @@
 .download-button {
   margin-top: 15px;
   padding: 10px;
-  background: #3498db;
+  background: #0288d1;
   color: white;
   text-decoration: none;
   border-radius: 5px;
@@ -152,7 +126,7 @@
 }
 
 .download-button:hover {
-  background: #217dbb;
+  background: #0288d1;
 }
 
 /* Se deshabilita el botón si no hay factura */
@@ -161,4 +135,16 @@
   cursor: not-allowed;
   pointer-events: none;
 }
+/* Estilos para los campos con errores */
+.error-input {
+  border: 2px solid red !important;
+  background-color: transparent !important; /* Leve fondo rosado para destacar */
+}
 
+/* Mensaje de error */
+.error-text {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px; /* Separa el mensaje del input */
+  display: block; /* Asegura que el texto aparezca en una nueva línea */
+}

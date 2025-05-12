@@ -1,0 +1,141 @@
+/* 📌 Contenedor principal */
+.mantenimiento-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  justify-content: flex-start;
+  padding-top: 70px;
+  background-color: #e0f7fa;
+}
+
+/* 📌 Contenedor de los paneles */
+.mantenimiento-content {
+  display: flex;
+  justify-content: space-between; /* Separa los paneles */
+  align-items: flex-start;
+  width: 90%;
+  max-width: 1300px;
+  margin: 0 auto;
+  gap: 90px; /* 📌 Mayor separación entre los paneles */
+  height: 85vh; /* 📌 Asegura que ocupe casi toda la pantalla */
+}
+
+/* 📌 Panel del dashboard de mantenimiento */
+.mantenimiento-dashboard {
+  width: 90%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  height: 90%; /* 📌 Se extiende completamente */
+}
+
+/* 📌 Título del panel */
+.mantenimiento-dashboard h2 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #01579b;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* 📌 Select para filtrar habitaciones */
+.mantenimiento-dashboard select {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* 📌 Tabla con altura fija y scroll */
+.mantenimiento-table-container {
+  max-height: 500px; /* 📌 Fija una altura máxima */
+  overflow-y: auto;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  flex-grow: 1; /* 📌 Hace que la tabla se adapte al espacio */
+}
+
+.mantenimiento-dashboard table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.mantenimiento-dashboard th, .mantenimiento-dashboard td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.mantenimiento-dashboard th {
+  background-color: #0288d1;
+  color: white;
+}
+
+.mantenimiento-registro {
+  width: 35%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  min-height: 30vh; /* Permite que crezca si es necesario */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: min-height 0.3s ease-in-out;
+  
+}
+
+/* 📌 Estilos de títulos */
+.mantenimiento-registro h3 {
+  font-size: 20px;
+  color: #01579b;
+  text-align: center;
+}
+
+/* 📌 Inputs y Selects */
+.mantenimiento-registro select,
+.mantenimiento-registro input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 0px;
+}
+
+/* 📌 Botón de registro */
+.mantenimiento-registro button {
+  padding: 12px;
+  background: #0288d1;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.mantenimiento-registro button:hover {
+  background: #0277bd;
+}
+.input-error {
+  border: 2px solid red !important;
+  background-color: #ffffff !important; /* Un ligero fondo rosa */
+}
+
+/* 📌 Mensajes de error */
+.error-text {
+  color: red;
+  font-size: 12px;
+  margin-top: 0px;
+  margin-bottom: 3px;
+  text-align: left;
+  padding-left: 1px;
+}

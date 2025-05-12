@@ -52,6 +52,12 @@
 }
 
 .menu li {
+  font-size: 18px; 
+  /*
+  width: 28px;  
+  height: 28px; 
+  margin-right: 15px; */
+
   display: flex;
   align-items: center;
   padding: 15px;
@@ -89,3 +95,83 @@
   display: inline;
 }
 
+/* 📌 Estilos para el logo superior */
+.sidebar-header {
+  text-align: center;
+  padding: 20px 10px;
+}
+
+.sidebar-logo {
+  width: 80px; /* Ajusta el tamaño del logo */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.sidebar-title {
+  color: white;
+  font-size: 16px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* 📌 Sección del usuario en la parte inferior */
+/*
+.sidebar-footer {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+}
+*/
+.sidebar-footer {
+  position: absolute;
+  bottom: 80px;  /* 📌 Subimos más el footer */
+  width: 100%;
+  text-align: center;
+  padding-bottom: 5px; /* Reducimos el padding extra */
+}
+
+/* 📌 Espaciado extra para el icono del usuario */
+.user-icon {
+  font-size: 40px;
+  color: white;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 5px; /* Espaciado entre el icono y el nombre del rol */
+}
+
+/* 📌 Ajustamos el margen del nombre del usuario */
+.user-role {
+  display: block;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px; /* 📌 Espaciado entre el rol y el botón */
+}
+
+/* 📌 Ajustamos el botón de salir */
+.logout-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  cursor: pointer;
+  padding: 10px;
+  margin-top: 0;  /* 📌 Eliminamos margen superior */
+}
+
+/* 📌 Ajuste al ícono de salida */
+.logout-icon {
+  font-size: 16px;
+  margin-right: 5px;
+}
+
+.logout-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}

@@ -1,0 +1,179 @@
+/* Importar la fuente Montserrat desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+/* Asegúrate de que el modal se muestre siempre que esté visible */
+.encuesta-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: visible;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.encuesta-modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  visibility: visible;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.encuesta-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.encuesta-caritas {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.encuesta-carita-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.encuesta-carita {
+  font-size: 40px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  outline: none;
+  border: none;
+}
+
+/* Estilo para la carita seleccionada */
+.encuesta-carita.selected {
+  transform: scale(1.8); /* Aumenta aún más el tamaño de la carita seleccionada */
+  z-index: 1;
+}
+
+/* Cuando la carita está seleccionada, quitar el hover para evitar que se haga más pequeña */
+.encuesta-carita.selected:hover {
+  transform: scale(1.8); /* Mantener el tamaño original cuando está seleccionada */
+}
+
+/* Elimina recuadro blanco o borde extraño en las caritas */
+.encuesta-carita:active {
+  outline: none;
+}
+
+/* Efecto hover solo cuando no está seleccionada */
+.encuesta-carita:hover {
+  transform: scale(1.2);
+}
+
+.encuesta-titulo {
+  margin-top: 15px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.encuesta-titulo.mala {
+  color: #e74c3c; /* Rojo para "Mala" */
+}
+
+.encuesta-titulo.regular {
+  color: #f39c12; /* Amarillo para "Regular" */
+}
+
+.encuesta-titulo.buena {
+  color: #2ecc71; /* Verde para "Buena" */
+}
+
+.encuesta-titulo.excelente {
+  color: #3498db; /* Azul para "Excelente" */
+}
+
+.encuesta-textarea {
+  width: 100%;
+  height: 100px;
+  margin: 10px 0;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  resize: none;
+}
+
+.encuesta-modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.encuesta-button {
+  padding: 8px 16px;
+  font-size: 14px;
+  background-color: #0288d1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 0 5px; /* Separa los botones con margen horizontal */
+}
+
+.encuesta-button:hover {
+  background-color: #0277bd;
+}
+
+.encuesta-button:active {
+  background-color: #01579b;
+}
+
+/* Estilos para el modal de agradecimiento */
+.gracias-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1; /* Inicialmente visible */
+  transition: opacity 3s ease-out; /* Desvanecimiento en 2 segundos */
+}
+
+.gracias-modal.fade-out {
+  opacity: 0; /* Desaparece gradualmente */
+}
+
+.gracias-modal-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+}
+
+.gracias-modal-content h2 {
+  font-size: 30px;
+  margin-bottom: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.encuesta-modal {
+  opacity: 1; /* Inicialmente visible */
+  transition: opacity 3s ease-out; /* Desvanecimiento en 2 segundos */
+}
+
+.encuesta-modal.fade-out {
+  opacity: 0; /* Desaparece gradualmente */
+}
