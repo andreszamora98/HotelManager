@@ -1,14 +1,35 @@
+<!-- index.html -->
 <!doctype html>
 <html lang="en">
   <head>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <meta charset="UTF-8" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Poppins:wght@400;700&family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>Hotel Manager KOM</title>
+
+    <!-- Polyfill para que response.accept y request.accept no exploten -->
+    <script>
+      ;['Response', 'Request'].forEach(name => {
+        const proto = window[name] && window[name].prototype
+        if (proto && !Object.prototype.hasOwnProperty.call(proto, 'accept')) {
+          Object.defineProperty(proto, 'accept', {
+            get() {
+              return this.headers.get('Accept')
+            },
+            configurable: true
+          })
+        }
+      })
+    </script>
   </head>
+
   <body>
     <div id="root"></div>
+    <!-- main.jsx se inyectará aquí en dev y en build (por Vite) -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
